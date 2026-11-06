@@ -1,0 +1,9 @@
+function shortenUrl() {
+    const longUrl = document.getElementById('longUrl').value;
+    if(!longUrl) {
+        alert('Please enter a URL');
+        return;
+    }
+    const shortUrl = 'https://short.ly/' + Math.random().toString(36).substring(7);
+    document.getElementById('result').innerHTML = Shortened link: <a href="${longUrl}" target="_blank">${shortUrl}</a>;
+}
