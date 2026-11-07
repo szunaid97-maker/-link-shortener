@@ -1,9 +1,41 @@
-function shortenUrl() {
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAx_rBe6ZPN8UCwqrz_wjI4rA8cPmtZV8",
+    authDomain: "zunaid-e8c04.firebaseapp.com",
+    projectId: "zunaid-e8c04",
+    storageBucket: "zunaid-e8c04.appspot.com",
+    messagingSenderId: "708837610159",
+    appId: "1:708837610159:web:4f23cdc424b2152e97fa5a",
+    measurementId: "G-DJ33VY8QH5"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function shortenUrl() {
     const longUrl = document.getElementById('longUrl').value;
-    if(!longUrl) {
-        alert('Please enter a URL');
+    if (!longUrl) {
+        alert('Please enter a long link');
         return;
     }
-    const shortUrl = 'https://short.ly/' + Math.random().toString(36).substring(7);
-    document.getElementById('result').innerHTML = Shortened link: <a href="${longUrl}" target="_blank">${shortUrl}</a>;
+    
+    const shortId = Math.random().toString(36).substring(7);
+    const shortUrl = https://zunaid97-maker.github.io/link-shortener/?=${shortId};
+    
+    try {
+        await setDoc(doc(db, "links", shortId), {
+            longUrl: longUrl,
+            shortUrl: shortUrl,
+            createdAt: new Date()
+        });
+        
+        document.getElementById('result').innerHTML = Shortened link: <a href="${shortUrl}" target="_blank">${shortUrl}</a>;
+    } catch (e) {
+        console.error("Error adding document: ", e);
+        alert("Failed to shorten link.");
+    }
 }
+
+window.shortenUrl = shortenUrl;
