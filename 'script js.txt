@@ -22,7 +22,7 @@ async function shortenUrl() {
     }
     
     const shortId = Math.random().toString(36).substring(7);
-    const shortUrl = https://zunaid97-maker.github.io/link-shortener/?=${shortId};
+    const shortUrl = "[https://jr-link-shortener.talk4fun.net/$](https://jr-link-shortener.talk4fun.net/$){shortId}";
     
     try {
         await setDoc(doc(db, "links", shortId), {
